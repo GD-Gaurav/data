@@ -1,0 +1,8 @@
+Select Department, Employee, Salary
+From (Select d.Name as Department, e.Name as Employee, Salary,
+dense_rank() over (partition by d.Name order by Salary desc) as rnk
+From Employee e 
+Join Department d On e.DepartmentId = d.Id) as sal
+Where rnk = 1;
+
+### Change the "rnk" to whatever number you want. If you want it from the bottom, change "Salary desc" "Salary asc"
